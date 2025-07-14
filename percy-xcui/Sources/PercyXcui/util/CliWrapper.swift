@@ -99,7 +99,10 @@ public class CliWrapper {
       guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse,
         (200...299).contains(httpResponse.statusCode)
       else {
-        Log.error(msg: "Invalid Response received from the server")
+          Log.error(msg: "Invalid Response received from the server")
+          if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
+              Log.error(msg: "Invalid response: \(httpResponse.allHeaderFields)")
+          }
         return
       }
 

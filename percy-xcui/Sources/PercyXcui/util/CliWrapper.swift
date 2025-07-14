@@ -101,7 +101,10 @@ public class CliWrapper {
       else {
           Log.error(msg: "Invalid Response received from the server")
           if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
-              Log.error(msg: "Invalid response: \(httpResponse.allHeaderFields)")
+              Log.error(msg: "Invalid response status code: \(httpResponse.statusCode)")
+          }
+          if let data, let dataString = String(data: data, encoding: .utf8) {
+              Log.error(msg: "Invalid response: \(dataString)")
           }
         return
       }
